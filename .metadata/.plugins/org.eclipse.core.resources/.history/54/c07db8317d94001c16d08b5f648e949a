@@ -1,0 +1,14 @@
+package stream;
+
+public class TestStream {
+	public static void main(String[] args) {
+		System.out.println("여성 목록 : ");
+		for(People people : People.getPeapleList()) {
+			if(people.getGender()==2) {
+				System.out.println(people);
+			}
+		}
+		
+	}
+
+}

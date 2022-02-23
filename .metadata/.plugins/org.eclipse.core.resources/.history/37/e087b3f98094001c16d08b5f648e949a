@@ -1,0 +1,43 @@
+package stream;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+public class TestStream {
+	public static void main(String[] args) {
+		//향상된 for문을 이용한 여성목록 출력
+		System.out.println("===향상된 for문을 이용한 여성목록 출력===");
+		System.out.println("여성 목록 : ");
+		for(People people : People.getPeapleList()) {
+			if(people.getGender()==2) {
+				System.out.println(people);
+			}
+		}
+		//Stream의 filter를 이용한 여성목록 출력
+		System.out.println("====Stream의 filter를 이용한 여성목록 출력====");
+		List<People> femaleList = People.getPeapleList().stream().filter(people -> people.getGender()==1).collect(Collectors.toList());
+		System.out.println("여성 목록 : ");
+		femaleList.forEach(System.out::println);
+	
+		//stream()에서 제공하는 sorted()를 사용하면 원하는 필드로 정렬을 할 수 있다.
+		List<People> sortedList = People.getPeapleList().stream().
+				sorted(Comparator.comparing(People::getAge)).collect(Collectors.toList());
+		System.out.println("나이순 목록 : ");
+		sortedList.forEach(System.out::println);
+		
+		//stream()에서 제공하는 allMatch를 사용하면 모두 조건을 만족하는지 검사할 수 있다.
+		boolean allMatch = People.getPeapleList().stream().allMatch(people -> people.getAge()>20);
+		System.out.println("나이가 모두 20세이상인가?");
+		System.out.println(allMatch);
+		
+		//stream()에서 제공하는 anyMatch를 사용하면 하나라도 조건을 만족하는지 알수있다.
+		boolean anyMatch = People.getPeapleList().stream().allMatch(people -> people.getAge()>20);
+		System.out.println("나이가 모두 20세이상인가?");
+		System.out.println(allMatch);
+																
+				
+	}
+
+}
